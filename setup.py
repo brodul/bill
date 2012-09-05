@@ -1,4 +1,8 @@
 from setuptools import setup, find_packages
+import os
+
+if os.name == "nt":
+      import py2exe
 
 version = '0.1'
 
