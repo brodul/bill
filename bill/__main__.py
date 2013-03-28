@@ -12,7 +12,7 @@ from xlwt import easyxf
 #STOLPEC Z REFERENCO
 C_REF = 0
 
-#STOLPEC_KOLIKO_JE_ZA_PLACAT 
+#STOLPEC_KOLIKO_JE_ZA_PLACAT
 C_TO_PAY= 19
 
 
@@ -63,12 +63,13 @@ def check_uniques(workbook, uniques, duplicates):
     out_sheet.write(0, C_OFFSET + 5, "Datum placila")
     # excel loop
     for row in range(1, sheet.nrows):
-        value = sheet.cell(row, C_REF).value
+        value = str(int(sheet.cell(row, C_REF).value)) + str(sheet.cell(row, 1).value.replace("'", ""))
         # uniques loop
         for unique in uniques:
             reference = filter_reference(unique['REF_ODOBR'])
             out_sheet.write(row, C_OFFSET, 0, rn)
             if reference == value:
+                nonmaching.remove(unique)
                 out_sheet.write(row, C_OFFSET, 1, rp)
                 num_payed += 1
                 out_sheet.write(row, C_OFFSET + 5 ,unique['DATUM_VAL'])
@@ -80,8 +81,7 @@ def check_uniques(workbook, uniques, duplicates):
                 if income == value_to_pay:
                     out_sheet.write(row, C_OFFSET + 4, 'OK', rp)
                 else:
-                    out_sheet.write(row, C_OFFSET + 4, 'Premalo', rn)
-                del nonmaching[nonmaching.index(unique)]
+                    out_sheet.write(row, C_OFFSET + 4, 'Premalo ali prevec', rn)
                 break
 
     out_sheet.write(R_OFFSET + 1, 0 , "Informacije")
