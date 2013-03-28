@@ -20,6 +20,7 @@ setup(name='bill',
       packages=find_packages(exclude=['ez_setup', 'examples', 'tests']),
       include_package_data=True,
       zip_safe=False,
+	  zipfile=None,
       install_requires=[
             "xlrd",
             "xlwt",
@@ -29,5 +30,12 @@ setup(name='bill',
       entry_points="""
       # -*- Entry points: -*-
       """,
-      console="bill/__main__.py"
-      )
+      console=["bill/__main__.py"],
+	  
+	  # PY2EXE: modules to be included
+	  modules = ["bill"],
+	  # PY2EXE: script to be main executable
+	  windows = [{ "script" : "bill/__main__.py" }],
+	  # PY2EXE: library requirements to be included (add excludes here)
+	  options = { "py2exe" : { "includes" : ["xlrd", "xlwt", "xlutils" ]} }
+)
