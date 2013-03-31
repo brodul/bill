@@ -23,11 +23,12 @@ setup(name='bill',
       install_requires=[
             "xlrd",
             "xlwt",
-            "xlutils"
+            "xlutils",
+            "pyside"
           # -*- Extra requirements: -*-
       ],
       entry_points="""
       # -*- Entry points: -*-
       """,
-      console="bill/__main__.py"
+      console="bill/qt.py"
       )
